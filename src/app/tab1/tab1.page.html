@@ -1,8 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Tab 1 </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,5 +11,25 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <app-counter [count]="100"></app-counter>
+  <app-counter [step]="2" (ten)="report($event)"></app-counter>
+
+  <ion-list>
+    <ion-item *ngFor="let product of products">
+      <ion-thumbnail slot="start">
+        <img src="https://picsum.photos/seed/1/200/200" />
+      </ion-thumbnail>
+      <ion-label class="ion-text-wrap">
+        {{product.name}} {{product.price|currency}}
+        <ng-container *ngIf="product.cart">x {{product.cart}}</ng-container>
+      </ion-label>
+      <ion-buttons>
+        <ion-button (click)="addToCart(product)" size="small">
+          Add to Cart
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <app-counter></app-counter>
 </ion-content>
